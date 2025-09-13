@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Ig‑Creator — Gmail Read‑Only</title>
+  <meta name="description" content="Ig‑Creator: securely connecting to Gmail with read‑only access you approve." />
+  <link rel="icon" href="logo.png" />
+  <style>
+    /* --- Minimal reset --- */
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{height:100%}
+    :root{
+      --bg:#0b0d10;           /* page background */
+      --panel:#12161b;        /* cards/header */
+      --muted:#8892a6;        /* secondary text */
+      --text:#e6edf3;         /* primary text */
+      --border:#1e2630;       /* subtle borders */
+      --brand:#7dd3fc;        /* accent */
+      --brand-2:#60a5fa;      /* secondary accent */
+    }
+    body{margin:0;font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;color:var(--text);background:var(--bg)}
+
+    /* --- Layout --- */
+    header{position:sticky;top:0;z-index:10;background:var(--panel);border-bottom:1px solid var(--border)}
+    .container{max-width:1000px;margin:0 auto;padding:0 16px}
+    .brand{display:flex;align-items:center;gap:10px;padding:14px 0}
+    .brand img{width:28px;height:28px;border-radius:8px;display:inline-block}
+    .brand strong{letter-spacing:.2px}
+
+    nav{display:flex;gap:16px;align-items:center}
+    nav a{color:var(--text);text-decoration:none;padding:8px 10px;border-radius:8px}
+    nav a:hover{background:#0f141a}
+
+    .hero{padding:56px 0}
+    .hero h1{font-size:clamp(28px,4vw,40px);margin:0 0 10px}
+    .hero p{margin:0;color:var(--muted)}
+
+    .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin:24px 0 48px}
+    .card{border:1px solid var(--border);border-radius:14px;padding:18px;background:var(--panel)}
+    .card h3{margin:0 0 6px;font-size:18px}
+    .card p{margin:0;color:var(--muted)}
+
+    .notice{border-left:3px solid var(--brand-2);padding:12px 14px;border-radius:8px;background:#0f141a;color:var(--text)}
+
+    footer{border-top:1px solid var(--border);padding:18px 0;color:var(--muted);background:var(--panel)}
+
+    /* --- Mobile nav toggle --- */
+    .topbar{display:flex;justify-content:space-between;align-items:center}
+    .menu-btn{display:none;appearance:none;border:0;background:transparent;font-size:28px;line-height:1;cursor:pointer;padding:8px;color:var(--text)}
+    @media (max-width:640px){
+      nav{display:none}
+      nav.open{display:flex;flex-direction:column;gap:8px;padding-bottom:12px}
+      .menu-btn{display:block}
+    }
+
+    /* --- Links --- */
+    a.cta{display:inline-block;margin-top:14px;padding:10px 14px;border-radius:10px;border:1px solid var(--border);text-decoration:none;color:var(--text)}
+    a.cta:hover{border-color:var(--brand)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="topbar">
+        <div class="brand">
+          <img src="logo.png" alt="Ig‑Creator logo" />
+          <strong>Ig‑Creator</strong>
+        </div>
+        <button class="menu-btn" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      </div>
+      <nav aria-label="Primary" id="primary-nav">
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="privacy-policy.md">Privacy Policy</a>
+        <a href="tos.md">Terms of Service</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" id="home">
+    <section class="hero">
+      <h1>Secure Gmail Read‑Only Access</h1>
+      <p class="notice">We only read emails for services you explicitly approve via Google OAuth. No sending, deleting, or modifying mail.</p>
+      <a class="cta" href="privacy-policy.md">Review our Privacy Policy →</a>
+    </section>
+
+    <section id="features" class="grid" aria-label="Features">
+      <article class="card">
+        <h3>Google‑verified OAuth</h3>
+        <p>Connect using the official Gmail API and standardized OAuth consent flow.</p>
+      </article>
+      <article class="card">
+        <h3>Read‑only by design</h3>
+        <p>Scope is limited to <code>gmail.readonly</code> — no mailbox changes.</p>
+      </article>
+      <article class="card">
+        <h3>Data minimization</h3>
+        <p>We process only what’s needed for the feature you use; no ads, no data sales.</p>
+      </article>
+      <article class="card">
+        <h3>Your control</h3>
+        <p>Revoke access anytime in your Google Account security settings.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span>&copy; <span id="year"></span> Ig‑Creator</span>
+      <span style="margin-left:12px">·</span>
+      <a class="cta" href="tos.md" style="margin-left:12px">Terms</a>
+      <a class="cta" href="privacy-policy.md" style="margin-left:8px">Privacy</a>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const btn = document.querySelector('.menu-btn');
+    const nav = document.getElementById('primary-nav');
+    btn.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    // Year auto-fill
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
